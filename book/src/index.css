@@ -5,3 +5,6 @@
 .gradient{
     background: radial-gradient(circle,#F8EFBA ,#fdcb6e );
 }
+.modalBg{
+    background: rgba(0,0,0,0.6);
+}

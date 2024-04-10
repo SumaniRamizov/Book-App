@@ -9,7 +9,9 @@ export default {
     extend: {
       colors: {
         brown: '#453831',
-        orange: '#FF4900'
+        orange: '#FF4900',
+        card: '#1F2024',
+        textcolor: '#F8EFBA'
       }
     },
   },

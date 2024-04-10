@@ -1,24 +1,27 @@
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import bookImg from './img/book.png'
 import { FiSearch } from "react-icons/fi";
+import Card from './components/Card';
 
 
 
 function App() {
-  const [value,setValue] = useState("")
+  const [search,setSearch] = useState("")
+  const [data,setData] = useState([])
   
     function getData(value){
-      fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyCOmPQmwRZNuoQghYOw0Ftq8wZn9VxgasA`)
+      fetch(`https://www.googleapis.com/books/v1/volumes?q=${value}&key=AIzaSyCOmPQmwRZNuoQghYOw0Ftq8wZn9VxgasA&maxResults=40`)
     .then(res=>res.json())
-    .then(data=> console.log(data.items))
+    .then(data=> setData(data.items))
     .catch(err=>console.log(err))
     }
   
   function formSubmit(e){
     e.preventDefault()
-    getData(value)
+    getData(search)
+    console.log(data)
 
   }
   
@@ -31,12 +34,20 @@ function App() {
       <form onSubmit={formSubmit} className='flex flex-col  items-center'>
         <h2 className='text-2xl lg:text-3xl font-semibold text-brown mb-4'>Find Your Book</h2>
         <div className='w-full md:w-4/5 bg-white border border-gray-500 flex rounded-[2rem]'>
-          <input value={value} onChange={(e)=>setValue(e.target.value)} className='outline-none flex-1 p-4 bg-transparent text-lg text-brown font-medium' type="text" />
+          <input value={search} onChange={(e)=>setSearch(e.target.value)} className='outline-none flex-1 p-4 bg-transparent text-lg text-brown font-medium' type="text" />
           <button className='bg-orange hover:bg-opacity-90 text-white rounded-[2rem] px-8  text-xl' type='submit'>
           <FiSearch />
           </button>
         </div>
       </form>
+     
+      <div className='mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
+      {
+        data.map((item)=>(
+          <Card key={item.id} item={item} />
+        ))
+      } 
+      </div>
       
      </div>
     </>
