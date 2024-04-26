@@ -1,11 +1,8 @@
 
 import { useState } from 'react'
-import './App.css'
 import bookImg from './img/book.png'
 import { FiSearch } from "react-icons/fi";
 import Card from './components/Card';
-
-
 
 function App() {
   const [search,setSearch] = useState("")
